@@ -1,0 +1,80 @@
+<div class="section">
+  <div class="flex-display">
+    <div class="search-section flex-display" [formGroup]="searchForm">
+      <div class="form-group width-20">
+        <span class="label">Pickup</span>
+        <!-- <input [attr.list]="pickup-list" class="form-control" name="pickup" formControlName="pickup" autocomplete="off">
+        <datalist [id]="pickup-list">
+          <option *ngFor="let pickup of allLocations['pickup']" [value]="pickup">{{pickup}}</option>
+        </datalist> -->
+        <select formControlName="pickup" class="form-control">
+          <option value="">select</option>
+          <option *ngFor="let pickup of allLocations['pickup']" [value]="pickup">{{pickup}}</option>
+        </select>
+      </div>
+
+      <div class="form-group width-20">
+        <span class="label">Drop</span>
+        <!-- <input [attr.list]="drop-list" class="form-control" name="drop" formControlName="drop" autocomplete="off">
+        <datalist [id]="drop-list">
+          <option *ngFor="let drop of allLocations['drop']" [value]="drop">{{drop}}</option>
+        </datalist> -->
+        <select formControlName="drop" class="form-control">
+          <option value="">select</option>
+          <option *ngFor="let drop of allLocations['drop']" [value]="drop">{{drop}}</option>
+        </select>
+      </div>
+
+      <div class="form-group width-20">
+        <span class="label">Time</span>
+        <input type="time" class="form-control" formControlName="time">
+      </div>
+
+      <div class="form-group width-20">
+        <span class="label">Vehicle Type</span>
+        <select formControlName="vehicleType" class="form-control">
+          <option value="">select</option>
+          <option *ngFor="let type of VEHICLE_TYPE" [value]="type">{{type}}</option>
+        </select>
+      </div>
+
+      <div class="width-20">
+        <button class="btn primary-bg width-100 margin-8-top" (click)="searchRides()"> Search </button>
+      </div>
+
+    </div>
+    <div *ngIf="allRides.length > 0;  else noRides" class="width-100">
+      <table class="custom-table">
+        <thead>
+          <tr class="primary-bg">
+            <th>Vehicle Type</th>
+            <th>Vehicle No</th>
+            <th>Vacant Seats</th>
+            <th>Time</th>
+            <th>Pickup Point</th>
+            <th>Destination</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let ride of allRides">
+            <td>{{ride.vehicleType}}</td>
+            <td>{{ride.vehicleNo}}</td>
+            <td>{{ride.vacantSeats}}</td>
+            <td>{{ride.time}}</td>
+            <td>{{ride.pickupPoint}}</td>
+            <td>{{ride.destination}}</td>
+            <td><button class="btn primary-bg width-100" [disabled]="ride.vacantSeats === 0"
+                (click)="bookRide(ride.employeeId)">
+                BOOK </button></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <ng-template #noRides>
+      <h3 class="text-center width-100">
+        No rides to display !
+      </h3>
+    </ng-template>
+  </div>
+</div>

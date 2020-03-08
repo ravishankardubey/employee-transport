@@ -1,0 +1,19 @@
+.custom-table {
+  width: 100%;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+th {
+  text-align: left;
+  color: white;
+}
+
+.search-section {
+  width: 100%;
+  height: 65px;
+  margin-bottom: 20px;
+  background-color: #f3f3f3;
+}
